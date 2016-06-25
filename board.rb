@@ -94,6 +94,48 @@ class Board
 
   end
 
+  def attempt_autocomplete
+    no_more = false
+
+    until no_more == true
+      no_more = true
+
+      0.upto(7) do |s_i|
+        next if @stacks[s_i].empty?
+        current_card = @stacks[s_i].last
+
+        0.upto(3) do |p_i|
+          if current_card.suit == @piles[p_i].last.suit &&
+            current_card.value - 1 == @piles[p_i].last.value
+
+            @piles[p_i].push(@stacks[s_i].pop)
+            no_more = false
+          end
+        end
+
+      end
+
+      0.upto(3) do |h_i|
+        next if @holds[h_i] == nil
+        current_card = @holds[h_i]
+
+        0.upto(3) do |p_i|
+          if current_card.suit == @piles[p_i].last.suit &&
+            current_card.value - 1 == @piles[p_i].last.value
+
+            @piles[p_i].push(current_card)
+            @holds[h_i] = nil
+            no_more = false
+          end
+        end
+
+      end
+
+    end
+
+
+  end
+
 
 
   def render

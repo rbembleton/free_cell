@@ -28,6 +28,7 @@ class Game
     this_move = nil
     until valid_move?(this_move)
       this_move = get_input
+      return if this_move == "auto"
     end
 
     @board.make_move(this_move)
@@ -48,6 +49,7 @@ class Game
     begin
       puts "What pile would you like to take a card off of?"
       from_p = parse_entry(gets.chomp)
+      return "auto" if from_p == "auto"
     rescue StandardError => e
       puts e.message
       retry
@@ -56,6 +58,7 @@ class Game
     begin
       puts "Where would you like to move that card?"
       to_p = parse_entry(gets.chomp)
+      return "auto" if to_p == "auto"
     rescue StandardError => e
       puts e.message
       retry
@@ -66,6 +69,11 @@ class Game
   end
 
   def parse_entry(str)
+    if str.downcase == "auto" || str.downcase == "autocomplete"
+      @board.attempt_autocomplete
+      return "auto"
+    end
+
     if ('0'..'7').to_a.include?(str)
       str.to_i
     elsif ('A'..'H').to_a.include?(str.upcase)
