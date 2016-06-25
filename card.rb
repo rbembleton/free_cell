@@ -1,7 +1,7 @@
 require 'colorize'
 
 class Card
-  attr_reader :rank, :suit
+  attr_reader :rank, :suit, :color
 
   VALUE_CONVERSION = {
     :ace => 1,
@@ -42,10 +42,18 @@ class Card
     :diamonds => "⬥"
   }
 
+  COLOR_CONVERSION = {
+    :spades => :black,
+    :clubs => :black,
+    :hearts => :red,
+    :diamonds => :red
+  }
+
 
 
   def initialize(rank, suit)
     @rank, @suit = rank, suit
+    @color = COLOR_CONVERSION[@suit]
   end
 
   def value
@@ -55,7 +63,7 @@ class Card
   def to_s
     # debugger
     out_str = STRING_CONVERSION[@rank] + SUIT_CONVERSION[@suit]
-    suit == :hearts || suit == :diamonds ? out_str.colorize(:red) : out_str
+    color == :red ? out_str.colorize(:red) : out_str
   end
 
 
