@@ -19,7 +19,7 @@ class Game
       turn
     end
     display
-    "YOU WON!"
+    puts "YOU WON!"
   end
 
   def turn

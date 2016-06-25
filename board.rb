@@ -42,6 +42,7 @@ class Board
     end
 
     if to_p.is_a?(Fixnum)
+      return true if @stacks[to_p].empty?
       return false unless from_c.value + 1 == @stacks[to_p].last.value
       return false if from_c.color == @stacks[to_p].last.color
     elsif ('A'..'D').to_a.include?(to_p)
