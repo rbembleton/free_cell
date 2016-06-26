@@ -42,14 +42,15 @@ class Game
   end
 
   def deal
-    @board.place_cards(@deck)
+    @board.place_cards(@deck.shuffle)
+    @saved_board = @board.dup
   end
 
   def get_input
     begin
       puts "What pile would you like to take a card off of?"
       from_p = parse_entry(gets.chomp)
-      return "auto" if from_p == "auto"
+      return "auto" if from_p == "auto" || from_p == "restart"
     rescue StandardError => e
       puts e.message
       retry
@@ -58,7 +59,7 @@ class Game
     begin
       puts "Where would you like to move that card?"
       to_p = parse_entry(gets.chomp)
-      return "auto" if to_p == "auto"
+      return "auto" if to_p == "auto" || from_p == "restart"
     rescue StandardError => e
       puts e.message
       retry
@@ -72,6 +73,11 @@ class Game
     if str.downcase == "auto" || str.downcase == "autocomplete"
       @board.attempt_autocomplete
       return "auto"
+    end
+
+    if str.downcase == "restart"
+      restart_from_dup
+      return "restart"
     end
 
     if ('0'..'7').to_a.include?(str)
@@ -90,6 +96,11 @@ class Game
 
   def won?
     @board.piles.flatten.size == 56
+  end
+
+  def restart_from_dup
+    @board = @saved_board
+    @saved_board = @saved_board.dup
   end
 
 

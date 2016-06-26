@@ -18,7 +18,7 @@ class Board
   end
 
   def place_cards(deck)
-    deck.shuffle
+    @shuffled_dup_deck = deck.dup
     until deck.empty?
       0.upto(7) do |col|
         @stacks[col] << deck.pop
@@ -186,6 +186,12 @@ class Board
     end
 
     puts rend_out
+  end
+
+  def dup
+    b = Board.new
+    b.place_cards(@shuffled_dup_deck)
+    return b
   end
 
   def input_conversion
