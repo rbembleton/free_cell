@@ -3,8 +3,6 @@ class Board
   attr_reader :holds, :piles, :stacks
 
 
-
-
   def initialize
     @stacks = Array.new(8) { Array.new }
     @holds = Array.new(4)
@@ -139,13 +137,6 @@ class Board
 
 
   def render
-
-    # piles_bottom = {
-    #   0 => " ♣︎ ",
-    #   1 => " ⬥ ".colorize(:red),
-    #   2 => " ♠ ",
-    #   3 => " ♥︎ ".colorize(:red)
-    # }
 
     rend_out = ""
     rend_out += "  A  B  C  D          E  F  G  H\n"

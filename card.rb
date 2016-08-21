@@ -61,7 +61,6 @@ class Card
   end
 
   def to_s
-    # debugger
     out_str = STRING_CONVERSION[@rank] + SUIT_CONVERSION[@suit]
     color == :red ? out_str.colorize(:red) : out_str
   end
