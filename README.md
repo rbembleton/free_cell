@@ -11,11 +11,11 @@
 
 ## Screenshots
 
-Game play:
+###Game play:
 ![game_play](docs/game_play.png)
 
-Auto Complete:
+###Auto Complete:
 ![auto](docs/auto.png)
 
-After using auto complete:
+###After using auto complete:
 ![auto_complete](docs/auto_complete.png)
